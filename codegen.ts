@@ -1,15 +1,14 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
-import * as dotenv from "dotenv";
-import * as path from "path";
+import { loadEnv } from "vite";
 
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+const env = loadEnv(process.env.NODE_ENV || "development", process.cwd(), "");
 
 const config: CodegenConfig = {
   schema: [
     {
-      [process.env.GRAPHQL_ENDPOINT as string]: {
+      [env.GRAPHQL_ENDPOINT]: {
         headers: {
-          Authorization: `Bearer ${process.env.VITE_ACCESS_TOKEN}`,
+          Authorization: `Bearer ${env.VITE_ACCESS_TOKEN}`,
         },
       },
     },

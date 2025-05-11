@@ -6,6 +6,7 @@ const GET_BIRDS = gql(`
     birds {
       id
       english_name
+      thumb_url
     }
   }
 `);
