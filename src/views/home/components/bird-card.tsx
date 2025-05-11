@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import { Loader2 } from "lucide-react";
+import { useWatermarkedImage } from "@/hooks/use-watermarked-image";
 
 interface BirdCardProps {
   values: {
@@ -18,6 +18,11 @@ export const BirdCard: FC<BirdCardProps> = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+
+  const { watermarkedUrl, isLoading } = useWatermarkedImage(
+    thumbnailUrl,
+    isInView
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,7 +47,7 @@ export const BirdCard: FC<BirdCardProps> = ({
       <AspectRatio ratio={16 / 9}>
         <img
           ref={imgRef}
-          src={isInView ? thumbnailUrl : ""}
+          src={isInView ? watermarkedUrl : ""}
           alt={englishName}
           loading="lazy"
           decoding="async"
@@ -53,14 +58,12 @@ export const BirdCard: FC<BirdCardProps> = ({
           `}
           onLoad={() => setIsLoaded(true)}
         />
-        {!isLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Loader2 className="w-4 h-4 animate-spin" />
-          </div>
+        {(!isLoaded || isLoading) && (
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-400 animate-pulse  rounded-lg"></div>
         )}
       </AspectRatio>
       <div className="pt-3">
-        <h3 className="text-[16px]  leading-[24px] font-medium text-[#0D171C] text-foreground">
+        <h3 className="text-[16px] leading-[24px] font-medium text-[#0D171C] text-foreground">
           {englishName}
         </h3>
         <p className="text-[14px] leading-[21px] text-[#4F7A96]">{latinName}</p>
