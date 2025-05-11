@@ -47,7 +47,7 @@ export const BirdCard: FC<BirdCardProps> = ({
       <AspectRatio ratio={16 / 9}>
         <img
           ref={imgRef}
-          src={isInView ? watermarkedUrl : ""}
+          src={isInView && watermarkedUrl ? watermarkedUrl : undefined}
           alt={englishName}
           loading="lazy"
           decoding="async"
