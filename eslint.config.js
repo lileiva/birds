@@ -13,7 +13,9 @@ const compat = new FlatCompat({
 });
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  {
+    ignores: ["dist", "**/routeTree.gen.ts"],
+  },
   {
     extends: [
       js.configs.recommended,
@@ -46,7 +48,7 @@ export default tseslint.config(
             {
               name: "@apollo/client",
               importNames: ["gql"],
-              message: 'Please import gql from "./__generated__/gql" instead.',
+              message: 'Please import gql from "@/__generated__/gql" instead.',
             },
           ],
         },

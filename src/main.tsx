@@ -1,14 +1,18 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import './index.css';
-import App from './App.tsx';
+import ApiProvider from "./providers/ApiProvider.tsx";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { routeTree } from "./routeTree.gen";
 
-import ApiProvider from './providers/ApiProvider.tsx';
+const router = createRouter({
+  routeTree: routeTree,
+});
 
-createRoot(document.getElementById('root')!).render(
-	<StrictMode>
-		<ApiProvider>
-			<App />
-		</ApiProvider>
-	</StrictMode>
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <ApiProvider>
+      <RouterProvider router={router} />
+    </ApiProvider>
+  </StrictMode>
 );
