@@ -126,7 +126,7 @@ export const AddNoteForm: FC<AddNoteFormProps> = ({ onCancel, onSubmit }) => {
                   onClick={handleCancel}
                   disabled={isPending}
                   className="px-3 py-2 rounded-lg border border-[#D5DADF] 
-              text-[#4F7A96] hover:bg-[#F8FAFB] 
+              text-[hsla(226, 59%, 20%, 1)] hover:bg-[#F8FAFB] 
               transition-colors duration-200
               disabled:opacity-50 disabled:cursor-not-allowed"
                 >
