@@ -4,11 +4,11 @@ export const BirdLoadingView = () => {
   return (
     <div className="w-full animate-pulse">
       <div className="px-6 py-4 flex justify-between">
-        <h1 className="text-[32px] leading-[40px] font-bold tracking-[-0.8px]">
+        <h1 className="text-[32px] leading-[40px] font-bold tracking-[-0.8px] flex flex-row gap-2 items-end">
           <Link to="/" className="text-[hsla(200,37%,8%,0.4)]">
             Birds /
           </Link>{" "}
-          <span className="bg-gray-200 rounded w-40 h-8 inline-block" />
+          <span className="bg-gray-200 rounded w-16 sm:w-40 h-8" />
         </h1>
         <div className="h-10 w-32 bg-gray-200 rounded" />
       </div>

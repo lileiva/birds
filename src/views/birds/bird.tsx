@@ -27,12 +27,12 @@ export const BirdView = ({ bird, addNoteMutation }: BirdViewProps) => {
   return (
     <div className="w-full">
       <div className="px-6 py-4 flex justify-between">
-        <h2 className="text-[32px] leading-[40px] font-bold text-[#0D171C] tracking-[-0.8px]">
+        <h1 className="text-[32px] leading-[40px] font-bold text-[#0D171C] tracking-[-0.8px]">
           <Link to="/" className="text-[hsla(200,37%,8%,0.4)]">
             Birds /
           </Link>{" "}
           {bird.english_name}
-        </h2>
+        </h1>
         <AddNoteForm
           onCancel={() => undefined}
           onSubmit={async (values: { location: string; note: string }) => {

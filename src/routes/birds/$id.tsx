@@ -15,6 +15,7 @@ function Bird() {
   const { id } = Route.useParams();
   const { data, loading, error } = useQuery(BIRD_QUERY, {
     variables: { id },
+    fetchPolicy: "cache-and-network",
   });
   const addNoteMutation = useMutation<
     AddNoteMutation,
