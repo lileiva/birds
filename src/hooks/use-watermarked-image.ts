@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import DefaultBird from "../assets/default_bird.jpeg";
 const imageCache = new Map<string, string>();
 
 export const useWatermarkedImage = (originalUrl: string, isInView: boolean) => {
@@ -19,6 +19,11 @@ export const useWatermarkedImage = (originalUrl: string, isInView: boolean) => {
 
         setIsLoading(true);
         const imageResponse = await fetch(originalUrl);
+
+        if (!imageResponse.ok) {
+          throw new Error("Image not found");
+        }
+
         const imageBlob = await imageResponse.blob();
 
         const watermarkResponse = await fetch(
@@ -33,6 +38,10 @@ export const useWatermarkedImage = (originalUrl: string, isInView: boolean) => {
           }
         );
 
+        if (!watermarkResponse.ok) {
+          throw new Error("Watermark service failed");
+        }
+
         const watermarkedBlob = await watermarkResponse.blob();
         const url = URL.createObjectURL(watermarkedBlob);
 
@@ -42,7 +51,7 @@ export const useWatermarkedImage = (originalUrl: string, isInView: boolean) => {
         setError(
           err instanceof Error ? err : new Error("Failed to watermark image")
         );
-        setWatermarkedUrl(originalUrl);
+        setWatermarkedUrl(DefaultBird);
       } finally {
         setIsLoading(false);
       }

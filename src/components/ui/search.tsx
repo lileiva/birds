@@ -3,7 +3,6 @@ import { Search as SearchIcon } from "lucide-react";
 
 interface SearchProps {
   values: {
-    value: string;
     placeholder?: string;
   };
   options: {
@@ -12,7 +11,7 @@ interface SearchProps {
 }
 
 export const Search: FC<SearchProps> = ({
-  values: { value, placeholder = "Search..." },
+  values: { placeholder = "Search..." },
   options: { onChange },
 }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +23,6 @@ export const Search: FC<SearchProps> = ({
       <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-6 w-6 text-muted-foreground stroke-[#4F7A96]" />
       <input
         type="text"
-        value={value}
         onChange={handleChange}
         placeholder={placeholder}
         className="pl-11 w-full focus:outline-none focus:border-primary-500 text-[#4F7A96] placeholder:text-[#4F7A96] placeholder:opacity-100 text-[16px] leading-[24px]"

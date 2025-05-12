@@ -5,7 +5,9 @@ import { useDebounce } from "@/hooks/use-debounce";
 
 export function Home() {
   const [search, setSearch] = useState("");
-  const debouncedSearch = useDebounce({ values: { value: search } });
+  const debouncedSearch = useDebounce({
+    values: { value: search, delay: 300 },
+  });
 
   return (
     <div className="w-full">
@@ -17,7 +19,7 @@ export function Home() {
       <hr className="border-[#D5DADF]" />
       <div className="px-6 py-3">
         <Search
-          values={{ value: search, placeholder: "Search for birds" }}
+          values={{ placeholder: "Search for birds" }}
           options={{ onChange: setSearch }}
         />
       </div>

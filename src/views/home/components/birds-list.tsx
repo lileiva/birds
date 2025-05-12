@@ -11,10 +11,10 @@ interface BirdsListProps {
 export const BirdsList: FC<BirdsListProps> = ({ filter }) => {
   const { data, loading, error } = useQuery<BirdsData>(BIRDS_QUERY);
 
-  const filteredBirds = data?.birds.filter((bird) => {
+  const isVisible = (birdName: string) => {
     if (!filter) return true;
-    return bird.english_name.toLowerCase().includes(filter.toLowerCase());
-  });
+    return birdName.toLowerCase().includes(filter.toLowerCase());
+  };
 
   if (error) {
     return (
@@ -28,16 +28,14 @@ export const BirdsList: FC<BirdsListProps> = ({ filter }) => {
     <div className="">
       <div className="grid grid-cols-2 sm:flex sm:flex-row sm:flex-wrap gap-6">
         {loading
-          ? // Loading skeletons
-            Array.from({ length: 8 }).map((_, i) => (
+          ? Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="space-y-4">
                 <Skeleton />
                 <Skeleton />
                 <Skeleton />
               </div>
             ))
-          : // Actual bird cards
-            filteredBirds?.map((bird) => (
+          : data?.birds.map((bird) => (
               <BirdCard
                 key={bird.id}
                 values={{
@@ -45,6 +43,7 @@ export const BirdsList: FC<BirdsListProps> = ({ filter }) => {
                   thumbnailUrl: bird.thumb_url,
                   englishName: bird.english_name,
                   latinName: bird.latin_name,
+                  isVisible: isVisible(bird.english_name),
                 }}
               />
             ))}

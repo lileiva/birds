@@ -1,45 +1,32 @@
-import { gql } from "@/__generated__/gql";
-import { useQuery } from "@apollo/client";
+import { AddNoteMutation } from "@/__generated__/graphql";
+import { AddNoteMutationVariables } from "@/__generated__/graphql";
+import { BIRD_QUERY } from "@/graphql/bird";
+import { ADD_NOTE_MUTATION } from "@/graphql/notes";
+import { BirdView } from "@/views/birds/bird";
+import { useMutation, useQuery } from "@apollo/client";
 import { createFileRoute } from "@tanstack/react-router";
 
-const GET_BIRD = gql(`
-  query GetBird($id: ID!) {
-    bird(id: $id) {
-      id
-      english_name
-      thumb_url
-    }
-  }
-`);
-
 export const Route = createFileRoute("/birds/$id")({
-  component: BirdDetail,
+  component: Bird,
 });
 
-function BirdDetail() {
+function Bird() {
   const { id } = Route.useParams();
-  const { data, loading, error } = useQuery(GET_BIRD, {
+  const { data, loading, error } = useQuery(BIRD_QUERY, {
     variables: { id },
-    fetchPolicy: "cache-first",
+  });
+  const addNoteMutation = useMutation<
+    AddNoteMutation,
+    AddNoteMutationVariables
+  >(ADD_NOTE_MUTATION, {
+    refetchQueries: [BIRD_QUERY],
   });
 
   if (loading) return <div>Loading...</div>;
+
   if (error) return <div>Error: {error.message}</div>;
+
   if (!data?.bird) return <div>Bird not found</div>;
 
-  return (
-    <div>
-      <h1>{data.bird.english_name}</h1>
-      {data.bird.thumb_url && (
-        <img
-          src={data.bird.thumb_url}
-          alt={data.bird.english_name}
-          style={{ maxWidth: "100%", height: "auto" }}
-        />
-      )}
-      <p>
-        <em>{data.bird.english_name}</em>
-      </p>
-    </div>
-  );
+  return <BirdView bird={data?.bird} addNoteMutation={addNoteMutation} />;
 }
