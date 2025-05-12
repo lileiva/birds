@@ -3,6 +3,7 @@ import { AddNoteMutationVariables } from "@/__generated__/graphql";
 import { BIRD_QUERY } from "@/graphql/bird";
 import { ADD_NOTE_MUTATION } from "@/graphql/notes";
 import { BirdView } from "@/views/birds/bird";
+import { BirdLoadingView } from "@/views/birds/bird-loading";
 import { useMutation, useQuery } from "@apollo/client";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -22,7 +23,7 @@ function Bird() {
     refetchQueries: [BIRD_QUERY],
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <BirdLoadingView />;
 
   if (error) return <div>Error: {error.message}</div>;
 

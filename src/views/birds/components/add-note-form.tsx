@@ -30,6 +30,12 @@ export const AddNoteForm: FC<AddNoteFormProps> = ({ onCancel, onSubmit }) => {
     });
   };
 
+  const handleCancel = () => {
+    setIsDialogOpen(false);
+    setFormData({ location: "", note: "" });
+    onCancel();
+  };
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
@@ -117,7 +123,7 @@ export const AddNoteForm: FC<AddNoteFormProps> = ({ onCancel, onSubmit }) => {
               <div className="flex justify-end gap-3">
                 <button
                   type="button"
-                  onClick={onCancel}
+                  onClick={handleCancel}
                   disabled={isPending}
                   className="px-3 py-2 rounded-lg border border-[#D5DADF] 
               text-[#4F7A96] hover:bg-[#F8FAFB] 

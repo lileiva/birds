@@ -110,22 +110,31 @@ export const Image: FC<ImageProps> = ({
           will-change-transform
         `}
       >
-        <img
-          ref={imgRef}
-          src={watermarkedUrl || undefined}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
+        <div
           className={`
-            w-full h-full object-cover rounded-lg 
-            transition-[opacity,transform] duration-150
-            ${isLoaded ? "opacity-100" : "opacity-0"}
-            ${isZoomed ? "scale3d(2, 2, 1)" : "scale3d(1, 1, 1)"}
-            will-change-transform
-            ${className}
-          `}
-          onLoad={() => setIsLoaded(true)}
-        />
+          w-full h-full
+          ${isZoomed ? "absolute inset-0" : "relative"}
+        `}
+        >
+          <img
+            ref={imgRef}
+            src={watermarkedUrl || undefined}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            className={`
+              w-full h-full 
+              ${isZoomed ? "min-h-[200%] min-w-[200%] max-w-none absolute" : "object-cover"}
+              rounded-lg 
+              transition-[opacity,transform] duration-150
+              ${isLoaded ? "opacity-100" : "opacity-0"}
+              ${isZoomed ? "scale3d(2, 2, 1)" : "scale3d(1, 1, 1)"}
+              will-change-transform
+              ${className}
+            `}
+            onLoad={() => setIsLoaded(true)}
+          />
+        </div>
         {(!isLoaded || isLoading) && (
           <div className="absolute inset-0 flex items-center justify-center bg-slate-400 animate-pulse rounded-lg"></div>
         )}
