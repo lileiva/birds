@@ -63,9 +63,6 @@ export const Image: FC<ImageProps> = ({
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!enableZoom) return;
     if (!containerRef.current || !imgRef.current) return;
-    if (!isZoomed) {
-      setScale(2);
-    }
     e.preventDefault(); // Prevent page zoom
 
     const rect = containerRef.current.getBoundingClientRect();
