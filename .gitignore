@@ -25,3 +25,6 @@ dist-ssr
 .env
 
 src/__generated__
+
+test-results
+playwright-report

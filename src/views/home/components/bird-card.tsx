@@ -53,6 +53,7 @@ export const BirdCard: FC<BirdCardProps> = ({
       }`}
       aria-hidden={!isVisible}
       tabIndex={isVisible ? 0 : -1}
+      data-testid={`bird-card-${id}`}
     >
       <AspectRatio ratio={16 / 9}>
         <img

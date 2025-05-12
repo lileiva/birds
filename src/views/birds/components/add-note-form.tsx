@@ -48,7 +48,11 @@ export const AddNoteForm: FC<AddNoteFormProps> = ({ onCancel, onSubmit }) => {
           Add Note
         </button>
       </DialogTrigger>
-      <DialogContent className="">
+      <DialogContent
+        aria-describedby="add note description"
+        aria-description="Add a note"
+        className=""
+      >
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col">
             <DialogTitle className="py-4 px-4 text-[13px] leading-[16px] font-[600] font-['Inter'] text-[#0D171C]">

@@ -33,9 +33,9 @@ export const SideBar: FC<SideBarProps> = ({
     >
       <div className="p-4 space-y-4">
         <div className="flex flex-col">
-          <h1 className="font-['Inter'] text-[16px] leading-[24px] font-medium text-[#0D171C] tracking-[0px]">
+          <h2 className="font-['Inter'] text-[16px] leading-[24px] font-medium text-[#0D171C] tracking-[0px]">
             The Birds App
-          </h1>
+          </h2>
           <p className="font-['Inter'] font-normal text-[14px] leading-[21px] tracking-[0px] text-[#607080]">
             By Copilot
           </p>
